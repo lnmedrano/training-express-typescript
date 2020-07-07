@@ -1,5 +1,6 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import config from '../../../config';
+import { externalApiError } from '../../errors';
 import { HEADERS } from '../../constants';
 import { Info, Card } from './types';
 
@@ -18,12 +19,16 @@ const client = axios.create({
   }
 });
 
-export function getInfo(): Promise<Info> {
-  return client.get('info');
+export function getInfo(): Promise<AxiosResponse<Info>> {
+  return client.get('info').catch((reason: Error) => {
+    throw externalApiError(reason.message);
+  });
 }
 
-export function getAllCards(): Promise<Card[]> {
-  return client.get('cards');
+export function getAllCards(): Promise<AxiosResponse<Card[]>> {
+  return client.get('cards').catch((reason: Error) => {
+    throw externalApiError(reason.message);
+  });
 }
 
 export default {

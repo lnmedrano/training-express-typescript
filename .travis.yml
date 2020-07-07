@@ -7,6 +7,14 @@ sudo: true
 
 env:
   - CXX=g++-4.8 NODE_ENV=testing
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database db_ts;' -U postgres
+  - npm run migrations-test
+
 addons:
   apt:
     sources:

@@ -30,6 +30,13 @@ export interface IConfig {
       header_name: string; // eslint-disable-line @typescript-eslint/camelcase
       secret: string;
     };
+    hearthstone: {
+      apiUrl: ENV_VAR;
+    };
+    rapidApi: {
+      host: ENV_VAR;
+      key: ENV_VAR;
+    };
   };
   todos: {
     baseURL: ENV_VAR;

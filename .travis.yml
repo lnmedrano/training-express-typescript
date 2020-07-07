@@ -13,6 +13,7 @@ services:
 
 before_script:
   - psql -c 'create database db_ts;' -U postgres
+  - npm run migrations-test
 
 addons:
   apt:

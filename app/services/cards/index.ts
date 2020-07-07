@@ -1,6 +1,7 @@
 import axios from 'axios';
-import config from '../../config';
-import { HEADERS } from '../constants';
+import config from '../../../config';
+import { HEADERS } from '../../constants';
+import { Info, Card } from './types';
 
 const baseUrl = config.common.hearthstone.apiUrl as string;
 const rapidApiKey = config.common.rapidApi.key as string;
@@ -16,38 +17,6 @@ const client = axios.create({
     useQueryString: true
   }
 });
-
-export interface Info {
-  patch: string;
-  classes: string[];
-  sets: string[];
-  types: string[];
-  factions: string[];
-  qualities: string[];
-  races: string[];
-  locales: string[];
-}
-
-export interface Card {
-  cardId: string;
-  name: string;
-  cardSet: string;
-  type: string;
-  faction: string;
-  rarity: string;
-  cost: number;
-  attack: number;
-  health: number;
-  text: string;
-  flavor: string;
-  artist: string;
-  collectible: boolean;
-  elite: boolean;
-  race: string;
-  img: string;
-  imgGold: string;
-  locale: string;
-}
 
 export function getInfo(): Promise<Info> {
   return client.get('info');
